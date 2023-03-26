@@ -1,0 +1,40 @@
+$white: #ffffff;
+$black: #010713; //011930 //#31353B
+$blackIcon: #6c727c;
+$blue: #4485f9; //327cff
+$blueHover: #4a89f8; //4084fb
+$blueAccent: #4485f9; //327cff
+$blueBg: #f2f8fe;
+$pink: #ff3c6b;
+$pinkBg: #ff5c84;
+$yellow: #ffc107;
+$green: #34a853;
+$greenBg: #ebf7ee;
+$grayText: #919caf; //929BAB
+$grayIcon: #6e7e96;
+$grayLine: #eaeef4;
+$grayBg: #f5f7fa;
+$mobiBg: #f0f3f7;
+$hint: rgba(23, 24, 27, 0.9);
+$greyCheckbox: #d2d3de;
+
+$valueGray: #eff4ff;
+
+$sizes: (
+  'xs': 360px,
+  'xxs': 382px,
+  'sm': 576px,
+  'md': 767px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1440px
+);
+@mixin media($minmax, $media) {
+  @each $size, $resolution in $sizes {
+    @if $media==$size {
+      @media only screen and (#{$minmax}-width: $resolution) {
+        @content;
+      }
+    }
+  }
+}
