@@ -1,16 +1,30 @@
+<script setup>
+import { onUpdated } from 'vue';
+
+  const props = defineProps({
+    product: {
+      image: String,
+      price: Number,
+      title: String,
+    },
+    // avaible: Boolean
+  })
+
+</script>
+
 <template>
   <li class="product df df-ai-center">
-    <img class="product__img" src="../../assets/img/prodcut-img1.png" alt="" />
+    <img class="product__img" :src="props.product.image" alt="dwd" />
     <div class="product__middle df df-column">
-      <span class="product__not-avaible">Нет в наличии</span>
-      <p class="product__descr p3">Молодежная ул, 10В, Климовск мкр, Подольск, МО</p>
+      <!-- <span class="product__not-avaible">Нет в наличии</span> -->
+      <p class="product__descr p3">{{ props.product.title }}</p>
     </div>
     <div class="product__right df df-column">
-      <span class="product__price">38.99 р.</span>
-      <div class="df">
+      <span class="product__price">{{ product.price }} р.</span>
+      <!-- <div class="df">
         <span class="product__initial-price">38.55 р.</span>
         <span class="product__discount df df-jc-center df-ai-center">75%</span>
-      </div>
+      </div> -->
     </div>
   </li>
 </template>

@@ -1,62 +1,110 @@
 <script setup>
-import { onMounted } from 'vue'
-import { data } from '../../core/config/data'
-// import { mapConfig } from '../../core/config/map.config'
-import { createPlacemarkContent } from './createPlacemarkContent.js'
+import { onMounted, ref } from 'vue'
+import { useMainStore } from '../../core/stores/mainStore'
+import { createPlacemarkContent } from './map/createPlacemarkContent.js'
+import { createClusterContent } from './map/createClusterContent'
+import { createIconContent } from './map/createIconContent'
+
+
+const mainStore = useMainStore()
+const { setActivePharmacyId } = mainStore
 
 onMounted(() => {
   ymaps.ready(function () {
-    createPlacemarkContent().then(initMap)
-
-    function initMap(PlacemarkContentLayout) {
-      var myMap = new ymaps.Map(
-          'map',
-          {
-            // center: [53.905877, 27.560326],
-            center: [53.89001, 27.512545],
-            zoom: 20
-          },
-          {
-            searchControlProvider: 'yandex#search'
-          }
-        ),
-        myPlacemark = new ymaps.Placemark(
-          myMap.getCenter(),
-          {},
-          {
-            iconLayout: 'default#image',
-            iconImageHref: 'assets/img/clusterer.svg',
-            iconImageSize: [64, 64],
-            iconImageOffset: [-5, -38]
-          }
-        ),
-        myPlacemarkWithContent = new ymaps.Placemark(
-          [53.89001, 27.512545],
-          {
-            iconContent: '9999.20 р.',
-            cursor: 'default'
-          },
-          {
-            iconLayout: 'default#imageWithContent',
-            iconImageHref: 'assets/img/1.svg',
-            iconImageSize: [100, 32],
-            iconImageOffset: [-50, -32],
-            iconContentLayout: PlacemarkContentLayout
-          }
+        const template = createPlacemarkContent()
+        var myMap = new ymaps.Map(
+            'map',
+            {
+              center: [53.905877, 27.560326],
+              zoom: 10
+            },
+            {
+              searchControlProvider: 'yandex#search'
+            }
         )
+        myMap.options.set('minZoom', 5);
 
-      myPlacemarkWithContent.events.add('click', function (e) {
-        myMap.geoObjects.each((el) => {
-          myMap.geoObjects.remove(e.get('target'))
-          myMap.geoObjects.add(myPlacemark)
-          // el.properties.set('iconContent', 'клик')
-          // .set('iconLayoutContent', '<div>$[properties.iconContent]</div>')
+       var clusterer = new ymaps.Clusterer({   
+          clusterIcons: [{
+            href: 'assets/img/clusterer.svg',
+            size: [32, 32],
+            offset: [-16, -16]
+          },],
+          clusterIconContentLayout: createClusterContent()
+      });
+      const geoObjects = []
+
+        mainStore.pharmacies.forEach((pharmacy, i) => {
+            
+            const { content, defaultClass } = createIconContent(pharmacy.products, mainStore.cartProducts)
+            
+            const placemark = new ymaps.Placemark(
+              pharmacy.location,
+              { iconContent: content },
+              {
+                iconLayout: 'default#imageWithContent',
+                // нужна прозрачная
+                iconImageHref: 'assets/img/10.svg',
+                iconImageSize: [100, 32],
+                iconImageOffset: [-50, -32],
+                iconContentLayout: template
+              }
+            )
+            placemark.properties.set({
+              class: defaultClass
+            })
+          
+            placemark.events.add('click', (e) => {
+
+              geoObjects.forEach(el => {
+                el.properties.set({
+                  activeClass: ''
+                })
+              })
+
+              const element = e.get('target')
+              element.properties.set({ activeClass: 'red' })
+
+              myMap.setCenter(e.get('coords'), myMap.getZoom(), {
+                duration: 300,
+              })
+
+              setActivePharmacyId(pharmacy.id)
+              
+            })
+
+            geoObjects[i] = placemark
         })
-      })
-      myMap.geoObjects.add(myPlacemarkWithContent)
-    }
+
+        myMap.events.add('click', function (e) {
+          geoObjects.forEach(el => {
+            el.properties.set({
+              activeClass: ''
+            })
+          })
+          setActivePharmacyId('')
+        });
+
+        const asideCloseButton = document.querySelector('.pharmacy__close-button')
+        asideCloseButton.addEventListener('click', () => {
+          geoObjects.forEach(el => {
+            el.properties.set({
+              activeClass: ''
+            })
+          })
+          setActivePharmacyId('')
+        })
+
+        clusterer.add(geoObjects);
+        myMap.geoObjects.add(clusterer);
+        myMap.setBounds(clusterer.getBounds(), {
+          checkZoomRange: true
+        });
+    })
+
+
   })
-})
+
 </script>
 
 <template>
@@ -65,8 +113,14 @@ onMounted(() => {
 
 <style scoped>
 #map {
-  width: 100vw;
-  height: calc(100vh - 68.46px);
+  width: 100%;
+  height: auto;
+}
+
+.r {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .placemark {

@@ -1,20 +1,45 @@
+<script setup>
+  const props = defineProps({
+    pharmacy: {
+      id: String,
+      title: String,
+      locationDescr: String,
+      location: [Number],
+      workingHourse: String,
+      phone: String,
+      products: [
+          {
+              count: Number,
+              product: {
+                  id: String,
+                  title: String,
+                  price: Number,
+                  image: String
+              }
+          }
+      ]
+    }
+  })
+
+</script>
+
 <template>
   <div class="pharmacy df df-column">
-    <h5 class="pharmacy__title h7">Алладин-458</h5>
-    <p class="pharmacy__location-descr p3">Молодежная ул, 10В, Климовск мкр, Подольск, МО</p>
+    <h5 class="pharmacy__title h7">{{ pharmacy?.title }}</h5>
+    <p class="pharmacy__location-descr p3">{{ pharmacy?.locationDescr }}</p>
     <div class="pharmacy__info df df-column">
       <a class="pharmacy__link p3 df df-ai-center" href="tell:"
         ><svg width="16" height="16">
           <use href="../../assets/img/sprites.svg#icon-phone"></use>
         </svg>
-        +375 44 799-97-20
+        {{ pharmacy?.phone }}
       </a>
       <div class="pharmacy__time">
         <a class="pharmacy__link p3 df df-ai-center"
           ><svg width="16" height="16">
             <use href="../../assets/img/sprites.svg#icon-clock"></use>
           </svg>
-          Открыто до 22:00
+          {{ pharmacy?.workingHourse }}
         </a>
         <table class="pharmacy__time-table df-column">
           <tr class="pharmacy__time-table-row df df-jc-between">
