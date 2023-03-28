@@ -1,42 +1,42 @@
 <template>
-    <div class="map__header map-header df df-ai-center df-jc-between">
-        <div class="map-header__left df df-ai-center">
-            <div class="map-header__title h1">Пункты выдачи</div>
-            <div class="map-header__filters df df-ai-center">
-                <label class="map-header__input p3 df df-ai-center df-jc-center">
-                    <input class="" type="checkbox" id="input-open">
-                    Открыто сейчас
-                </label>
-                <label class="map-header__input p3 df df-ai-center df-jc-center">
-                    <input class="" type="checkbox" id="input-clock">
-                    Круглосуточно
-                </label>
-                <label class="map-header__input p3 df df-ai-center df-jc-center">
-                    <input class="" type="checkbox" id="input-stock">
-                    Все в наличии
-                </label>
-            </div>
-        </div>
-        <div class="map-header__right df df-ai-center">
-            <div class="map-header__buttons df df-ai-center">
-                <button class="map-header__btn map-header__btn--list df df-ai-center df-jc-center p3">
-                    <!-- <svg width="18" height="18">
-                        <use xlink:href="/img/sprites.svg#icon-list"></use>
-                    </svg> -->
-                    Список
-                </button>
-                <button class="map-header__btn map-header__btn--map df df-ai-center df-jc-center p3 active">
-                    <!-- <svg width="18" height="18">
-                        <use xlink:href="/img/sprites.svg#icon-location"></use>
-                    </svg> -->
-                    Карта
-                </button>
-            </div>
-            <!-- <svg width="18" height="18" class="map-header__close">
-                <use xlink:href="/img/sprites.svg#icon-close"></use>
-            </svg> -->
-        </div>
+  <div class="map__header map-header df df-ai-center df-jc-between">
+    <div class="map-header__left df df-ai-center">
+      <div class="map-header__title h1">Пункты выдачи</div>
+      <div class="map-header__filters df df-ai-center">
+        <label class="map-header__input p3 df df-ai-center df-jc-center">
+          <input class="" type="checkbox" id="input-open" />
+          Открыто сейчас
+        </label>
+        <label class="map-header__input p3 df df-ai-center df-jc-center">
+          <input class="" type="checkbox" id="input-clock" />
+          Круглосуточно
+        </label>
+        <label class="map-header__input p3 df df-ai-center df-jc-center">
+          <input class="" type="checkbox" id="input-stock" />
+          Все в наличии
+        </label>
+      </div>
     </div>
+    <div class="map-header__right df df-ai-center">
+      <div class="map-header__buttons df df-ai-center">
+        <button class="map-header__btn map-header__btn--list df df-ai-center df-jc-center p3">
+          <svg width="18" height="18">
+            <use xlink:href="/assets/img/sprites.svg#icon-list"></use>
+          </svg>
+          Список
+        </button>
+        <button class="map-header__btn map-header__btn--map df df-ai-center df-jc-center p3 active">
+          <svg width="18" height="18">
+            <use xlink:href="/assets/img/sprites.svg#icon-location"></use>
+          </svg>
+          Карта
+        </button>
+      </div>
+      <svg width="18" height="18" class="map-header__close">
+        <use xlink:href="/assets/img/sprites.svg#icon-close"></use>
+      </svg>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">

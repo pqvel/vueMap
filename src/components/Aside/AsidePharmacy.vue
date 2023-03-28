@@ -1,26 +1,25 @@
 <script setup>
-  const props = defineProps({
-    pharmacy: {
-      id: String,
-      title: String,
-      locationDescr: String,
-      location: [Number],
-      workingHourse: String,
-      phone: String,
-      products: [
-          {
-              count: Number,
-              product: {
-                  id: String,
-                  title: String,
-                  price: Number,
-                  image: String
-              }
-          }
-      ]
-    }
-  })
-
+const props = defineProps({
+  pharmacy: {
+    id: String,
+    title: String,
+    locationDescr: String,
+    location: [Number],
+    workingHourse: String,
+    phone: String,
+    products: [
+      {
+        count: Number,
+        product: {
+          id: String,
+          title: String,
+          price: Number,
+          image: String
+        }
+      }
+    ]
+  }
+})
 </script>
 
 <template>
@@ -30,14 +29,14 @@
     <div class="pharmacy__info df df-column">
       <a class="pharmacy__link p3 df df-ai-center" href="tell:"
         ><svg width="16" height="16">
-          <use href="../../assets/img/sprites.svg#icon-phone"></use>
+          <use href="/assets/img/sprites.svg#icon-phone"></use>
         </svg>
         {{ pharmacy?.phone }}
       </a>
       <div class="pharmacy__time">
         <a class="pharmacy__link p3 df df-ai-center"
           ><svg width="16" height="16">
-            <use href="../../assets/img/sprites.svg#icon-clock"></use>
+            <use href="/assets/img/sprites.svg#icon-clock"></use>
           </svg>
           {{ pharmacy?.workingHourse }}
         </a>
@@ -77,7 +76,7 @@
       <div class="df df-ai-center">
         <!-- width="5.33" height="16" -->
         <svg class="pharmacy__dropdown-icon" width="16" height="16">
-          <use href="../../assets/img/sprites.svg#arrow-menu"></use>
+          <use href="/assets/img/sprites.svg#arrow-menu"></use>
         </svg>
 
         <div class="df df-column">
@@ -90,7 +89,7 @@
     </div>
     <button class="pharmacy__close-button df">
       <svg width="12" height="12">
-        <use href="../../assets/img/sprites.svg#icon-close"></use>
+        <use href="/assets/img/sprites.svg#icon-close"></use>
       </svg>
     </button>
   </div>
@@ -133,10 +132,10 @@
       margin-right: 6px;
     }
   }
-  
+
   &__time {
     position: relative;
-    
+
     &-table {
       position: absolute;
       display: none;
@@ -171,7 +170,7 @@
           @include media('min', 'lg') {
             // display: none;
           }
-        }   
+        }
       }
     }
   }
