@@ -20,21 +20,21 @@
         <div class="map-header__right df df-ai-center">
             <div class="map-header__buttons df df-ai-center">
                 <button class="map-header__btn map-header__btn--list df df-ai-center df-jc-center p3">
-                    <svg width="18" height="18">
+                    <!-- <svg width="18" height="18">
                         <use xlink:href="/img/sprites.svg#icon-list"></use>
-                    </svg>
+                    </svg> -->
                     Список
                 </button>
                 <button class="map-header__btn map-header__btn--map df df-ai-center df-jc-center p3 active">
-                    <svg width="18" height="18">
+                    <!-- <svg width="18" height="18">
                         <use xlink:href="/img/sprites.svg#icon-location"></use>
-                    </svg>
+                    </svg> -->
                     Карта
                 </button>
             </div>
-            <svg width="18" height="18" class="map-header__close">
+            <!-- <svg width="18" height="18" class="map-header__close">
                 <use xlink:href="/img/sprites.svg#icon-close"></use>
-            </svg>
+            </svg> -->
         </div>
     </div>
 </template>
